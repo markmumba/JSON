@@ -1,7 +1,12 @@
+from views import app
+from models import Music
 import json
 
-with open('itunes.json') as f:
-    data = json.load(f)
+
+def get_data():
+    music_result = []
+    with open('itunes.json') as f:
+        data = json.load(f)
 
     for result in data['results']:
         if result['wrapperType'] == 'track':
@@ -10,4 +15,7 @@ with open('itunes.json') as f:
             trackName=result['trackName']
             artistViewUrl=result['artistViewUrl']
             trackPrice=result['trackPrice']
-            print(f"The artistId:{artistId} , Artist name: {artistName} , Track : {trackName}, Price :{trackPrice}, View url : {artistViewUrl}")
+            music_object=Music(artistId,artistName,trackName,trackPrice,artistViewUrl)
+            music_result.append(music_object)
+
+    return music_result
