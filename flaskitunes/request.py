@@ -23,7 +23,7 @@ from models import Music
 
 #     return music_result
 
-def get_music():
+def get_music(type):
 
     
     with open ('itunes.json') as f:
@@ -31,7 +31,7 @@ def get_music():
 
         music_list = []
         for song in collection['results']:
-            if song['wrapperType'] == 'track':
+            if song['wrapperType'] == type:
                 artistId=song['artistId']
                 artistName=song['artistName']
                 trackName=song['trackName']
@@ -39,8 +39,10 @@ def get_music():
                 trackPrice=song['trackPrice']
 
                 song_object =Music(artistId,artistName,trackName,trackPrice,artistViewUrl)
+                
 
                 music_list.append(song_object)
-
-        return music_list
+    
+    return music_list
+    
                 
