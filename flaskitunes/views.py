@@ -1,9 +1,23 @@
 from flask import Flask,render_template
-# from itunes import get_data
+from request import get_music
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    return render_template('itunes.html')
+    title = "Search Data compiled by Itunes "
+    table= get_music()
+    return render_template('itunes.html', table=table, title=title)
+
+
+
+
+
+
+
+
+
+
+if  __name__ == '__main__':
+    app.run(debug=True)
